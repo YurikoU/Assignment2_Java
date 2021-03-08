@@ -167,7 +167,7 @@ public class Student {
 		if ((grade < 0) || (100 < grade))
 		{
 			throw new IllegalArgumentException("grade must be 0-100 inclusive");
-		} else if (50 <= grade)
+		} else if (grade <= 50)
 		{
 			return;
 		} else {

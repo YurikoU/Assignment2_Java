@@ -132,7 +132,7 @@ public class CourseWithLab extends Course {
 	@param  student
 	@return -
 	 */		
-	public void addStudent(Student student)
+	public String addStudent(Student student)
 	{
 		super.addStudent(student);
 	}

@@ -137,7 +137,14 @@ public class Course {
 	@return -
 	 */	
 	public String addStudent(Student student) {
-		
+
+		if (getClassSize() < this.listOfStudents.size())
+		{
+			return "Student was not added because the course is full";
+		} else if (student.getCoursesCompleted().indexOf(checkPrerequisite()) != -1)
+		{
+			return "Student has not completed the prerequisite course: " + checkPrerequisite();			
+		} else {
 //		if (student.getReinstateStatus() == true)
 //		{
 //			if (getClassSize() < this.listOfStudents.size())
@@ -159,6 +166,10 @@ public class Course {
 //				}
 //			} 
 //		}
+					
+				}
+			
+				
 		
 	}
 
@@ -169,7 +180,11 @@ public class Course {
 	@param  -
 	@return toString() that is declared in Student class
 	 */	
-	public String displayTheClassList() {return this.listOfStudents.toString();}
+	public String displayTheClassList() {
+//		return this.listOfStudents.toString();
+		return this.listOfStudents.get(this.listOfStudents.size() - 1).toString();
+	
+	}
 	
 
 	/*
