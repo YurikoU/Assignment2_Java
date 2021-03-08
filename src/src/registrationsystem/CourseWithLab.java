@@ -117,7 +117,6 @@ public class CourseWithLab extends Course {
 	@return the instructors' full name
 	 */	
 	public String getLabTech() {return this.labTechnician.getFirstName() + " " + this.labTechnician.getLastName();}
-//	public String getLabTech() {return instructor.getFirstName() + " " + instructor.getLastName();}
 	
 	
 	/*
@@ -125,9 +124,7 @@ public class CourseWithLab extends Course {
 	@param  -
 	@return prerequisite
 	 */		
-	public String checkPrerequisite() {
-		return super.checkPrerequisite();
-	}
+	public String checkPrerequisite() {return super.checkPrerequisite();}
 	
 	
 	/*

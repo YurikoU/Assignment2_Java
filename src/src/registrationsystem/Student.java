@@ -20,7 +20,7 @@ public class Student {
 	private LocalDate registrationDate, dateOfBirth;
 	private boolean goodStanding = true;
 	private boolean reinstateStatus = true;
-	private ArrayList<String> listOfCourseCompleted;
+	private ArrayList<String> listOfCourseCompleted = new ArrayList<>();
 	private Course course;
 	
 	//[Test 1] [Test 7] Constructor with nine parameters with exception about a student's age
@@ -164,7 +164,7 @@ public class Student {
 	@return passed course info
 	 */		
 	public void addCompletedCourse(Course course, int grade) {
-		if ((grade < 0) || (grade < 100))
+		if ((grade < 0) || (100 < grade))
 		{
 			throw new IllegalArgumentException("grade must be 0-100 inclusive");
 		} else if (50 <= grade)
