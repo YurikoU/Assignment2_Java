@@ -20,7 +20,7 @@ public class CourseWithLab extends Course {
 	private String labRoom;
 	private DayOfWeek dayLabIsScheduled;
 	private LocalTime timeLabIsScheduled;
-	private Instructor instructor, labTechnichan;
+	private Instructor instructor, labTechnician;
 	
 	//[Test 34] Constructor with parameters
 	public CourseWithLab(Instructor instructor, String courseCode, String courseTitle, String classRoom,
@@ -29,7 +29,7 @@ public class CourseWithLab extends Course {
 	{
 		 //Call the constructor from the superclass, "Course"
 		super(instructor, courseCode, courseTitle, classRoom, dayCourseIsScheduled, timeCourseIsScheduled, credit);
-		this.labTechnichan = labTechnichan;
+		this.labTechnician = labTechnician;
 		this.labRoom = labRoom;
 		this.dayLabIsScheduled = dayLabIsScheduled;
 		this.timeLabIsScheduled = timeLabIsScheduled;
@@ -43,7 +43,7 @@ public class CourseWithLab extends Course {
 	{
 		 //Call the constructor from the superclass, "Course"
 		super(instructor, courseCode, courseTitle, classRoom, dayCourseIsScheduled, timeCourseIsScheduled, credit, prerequisite);
-		this.labTechnichan = labTechnichan;
+		this.labTechnician = labTechnician;
 		this.labRoom = labRoom;
 		this.dayLabIsScheduled = dayLabIsScheduled;
 		this.timeLabIsScheduled = timeLabIsScheduled;
@@ -112,14 +112,12 @@ public class CourseWithLab extends Course {
 	
 	
 	/*
-	[Test 39] method to return instructors including both a class lecturer and a lab technichan
+	[Test 39] method to return instructors including both a class lecturer and a lab technician
 	@param  -
 	@return the instructors' full name
 	 */	
-	public String getLabTech() {
-		return super.getCourseCode() + "-" + super.getCourseTitle() + " with lab, Instructor: " 
-				+ super.getInstructorToTeach() + ", lab tech: " + labTechnichan.getFirstName() + " " + labTechnichan.getLastName();
-	}
+	public String getLabTech() {return this.labTechnician.getFirstName() + " " + this.labTechnician.getLastName();}
+//	public String getLabTech() {return instructor.getFirstName() + " " + instructor.getLastName();}
 	
 	
 	/*
