@@ -19,7 +19,7 @@ public class Instructor {
 	private String firstName, lastName, streetAddress, city, postalCode;
 	private int instructorNumber;
 	private LocalDate registrationDate, dateOfBirth;
-	private Course course;
+	protected Course course;
 	ArrayList<String> listOfSubjects = new ArrayList<>();
 	
 	//[Test 9] [Test 19] Constructor with eight parameters with exception about a instructor's age and registration year

@@ -19,8 +19,8 @@ public class CourseWithLab extends Course {
 	//Declare private variables
 	private String labRoom;
 	private DayOfWeek dayLabIsScheduled;
-	private LocalTime timeLabIsScheduled;
-	private Instructor instructor, labTechnician;
+	private LocalTime timeLabIsScheduled, labCanStart, labCanEndBy;
+	protected Instructor instructor, labTechnician;
 	
 	//[Test 34] Constructor with parameters
 	public CourseWithLab(Instructor instructor, String courseCode, String courseTitle, String classRoom,
@@ -33,6 +33,19 @@ public class CourseWithLab extends Course {
 		this.labRoom = labRoom;
 		this.dayLabIsScheduled = dayLabIsScheduled;
 		this.timeLabIsScheduled = timeLabIsScheduled;
+		this.labCanStart = LocalTime.of(8,00);
+		this.labCanEndBy = LocalTime.of(18,00);
+		
+		//Validate if a professor can teach a course
+		if (instructor.instructorCanTeach(courseCode) == false)
+		{
+			throw new IllegalArgumentException("Professor " + instructor.getFirstName() + " " + instructor.getLastName()
+												+ " is not qualified to teach " + courseCode);
+		} else if (this.timeLabIsScheduled.isBefore(this.labCanStart) || this.timeLabIsScheduled.isAfter(this.labCanEndBy))
+		{
+			throw new java.lang.IllegalArgumentException("The lab start time must be between 08:00-18:00");
+		}
+
 	}
 
 	
@@ -47,6 +60,19 @@ public class CourseWithLab extends Course {
 		this.labRoom = labRoom;
 		this.dayLabIsScheduled = dayLabIsScheduled;
 		this.timeLabIsScheduled = timeLabIsScheduled;
+		this.labCanStart = LocalTime.of(8,00);
+		this.labCanEndBy = LocalTime.of(18,00);
+	
+		//Validate if a professor can teach a course
+		if (instructor.instructorCanTeach(courseCode) == false)
+		{
+			throw new IllegalArgumentException("Professor " + instructor.getFirstName() + " " + instructor.getLastName()
+												+ " is not qualified to teach " + courseCode);
+		} else if (this.timeLabIsScheduled.isBefore(this.labCanStart) || this.timeLabIsScheduled.isAfter(this.labCanEndBy))
+		{
+			throw new java.lang.IllegalArgumentException("The lab start time must be between 08:00-18:00");
+		}
+
 	}
 
 	
@@ -132,12 +158,12 @@ public class CourseWithLab extends Course {
 	@param  student
 	@return -
 	 */		
-	public String addStudent(Student student)
-	{
-		super.addStudent(student);
-	}
-	
-	
+//	public String addStudent(Student student)
+//	{
+//		super.addStudent(student);
+//	}
+//	
+//	
 	
 	
 	

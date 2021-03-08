@@ -17,11 +17,11 @@ public class Course {
 	//Declare private variables
 	private String courseCode, courseTitle, classRoom, prerequisite;
 	private DayOfWeek dayCourseIsScheduled;
-	private LocalTime timeCourseIsScheduled;
+	private LocalTime timeCourseIsScheduled, courseCanStart, courseCanEndBy;
 	private int credit;
 	private int classSize;
 	protected Instructor instructor;
-	private Student student;
+	protected Student student;
 	ArrayList<Student> listOfStudents = new ArrayList<>();
 
 	
@@ -38,8 +38,8 @@ public class Course {
 		this.timeCourseIsScheduled = timeCourseIsScheduled;
 		this.credit = credit;
 		this.classSize = 40;
-		LocalTime courseCanStart = LocalTime.of(8,00);
-		LocalTime courseCanEndBy = LocalTime.of(18,00);
+		this.courseCanStart = LocalTime.of(8,00);
+		this.courseCanEndBy = LocalTime.of(18,00);
 		
 		//Validate if a professor can teach a course
 		if (instructor.instructorCanTeach(courseCode) == false)
@@ -70,7 +70,7 @@ public class Course {
 		this.credit = credit;
 		this.classSize = 40;
 		this.prerequisite = prerequisite;
-		ArrayList<Student> listOfStudents = new ArrayList<Student>();
+		ArrayList<Student> listOfStudents = new ArrayList<>();
 		LocalTime courseCanStart = LocalTime.of(8,00);
 		LocalTime courseCanEndBy = LocalTime.of(18,00);
 

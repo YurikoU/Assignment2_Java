@@ -21,7 +21,7 @@ public class Student {
 	private boolean goodStanding = true;
 	private boolean reinstateStatus = true;
 	private ArrayList<String> listOfCourseCompleted = new ArrayList<>();
-	private Course course;
+	protected Course course;
 	
 	//[Test 1] [Test 7] Constructor with nine parameters with exception about a student's age
 	public Student(String firstName,String lastName,String streetAddress,
