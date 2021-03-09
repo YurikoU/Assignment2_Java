@@ -25,7 +25,7 @@ public class Instructor {
 	
 	
 	
-	//[Test 9] [Test 19] [Test 20] Constructor with eight parameters with exception about a instructor's age and registration year
+	//[Test 9] [Test 19] [Test 20] Constructor with exception about a instructor's age and registration year
 	public Instructor(String firstName,String lastName, int instructorNumber, String streetAddress, String city, String postalCode, 
 					LocalDate registrationDate, LocalDate dateOfBirth)
 	{

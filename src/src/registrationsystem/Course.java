@@ -13,7 +13,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-//Course class is a superclass of CourseWithLab class
 public class Course {
 
 	//Declare variables

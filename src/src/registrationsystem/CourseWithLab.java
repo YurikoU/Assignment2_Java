@@ -13,14 +13,19 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-//CourseWithLab class extends its superclass, "Course"
-public class CourseWithLab extends Course {
+public class CourseWithLab {
 
 	//Declare variables
-	private String labRoom;
-	private DayOfWeek dayLabIsScheduled;
-	private LocalTime timeLabIsScheduled, labCanStart, labCanEndBy;
+	private String courseCode, courseTitle, classRoom, prerequisite, labRoom;
+	private DayOfWeek dayCourseIsScheduled, dayLabIsScheduled;
+	private LocalTime timeCourseIsScheduled, courseCanStart, courseCanEndBy, timeLabIsScheduled, labCanStart, labCanEndBy;
+	private int credit, classSize;
+
+	//Create an Instructor class's object, a Student class's object and a Course class's object
 	private Instructor instructor, labTechnician;
+	private Student student;
+	private Course course;
+	
 	
 	//[Test 34] [Test 37] 
 	//Constructor with exception about if a instructor can teach a lab, and if the schedule is acceptable
@@ -28,8 +33,13 @@ public class CourseWithLab extends Course {
 						DayOfWeek dayCourseIsScheduled, LocalTime timeCourseIsScheduled, int credit, 
 						Instructor labTechnician, String labRoom, DayOfWeek dayLabIsScheduled, LocalTime timeLabIsScheduled)
 	{
-		 //Call the constructor from its superclass, "Course"
-		super(instructor, courseCode, courseTitle, classRoom, dayCourseIsScheduled, timeCourseIsScheduled, credit);
+		this.instructor = instructor;
+		this.courseCode = courseCode;
+		this.courseTitle = courseTitle;
+		this.classRoom = classRoom;
+		this.dayCourseIsScheduled = dayCourseIsScheduled;
+		this.timeCourseIsScheduled = timeCourseIsScheduled;
+		this.credit = credit;
 		this.labTechnician = labTechnician;
 		this.labRoom = labRoom;
 		this.dayLabIsScheduled = dayLabIsScheduled;
@@ -59,12 +69,10 @@ public class CourseWithLab extends Course {
 						DayOfWeek dayCourseIsScheduled, LocalTime timeCourseIsScheduled, int credit, String prerequisite, 
 						Instructor labTechnician, String labRoom, DayOfWeek dayLabIsScheduled, LocalTime timeLabIsScheduled)
 	{
-		 //Call the constructor from the superclass, "Course"
-		super(instructor, courseCode, courseTitle, classRoom, dayCourseIsScheduled, timeCourseIsScheduled, credit, prerequisite);
-		this.labTechnician = labTechnician;
-		this.labRoom = labRoom;
-		this.dayLabIsScheduled = dayLabIsScheduled;
-		this.timeLabIsScheduled = timeLabIsScheduled;
+		//Call the first constructor
+		this(instructor, courseCode, courseTitle, classRoom, dayCourseIsScheduled, timeCourseIsScheduled, credit, 
+			labTechnician, labRoom, dayLabIsScheduled, timeLabIsScheduled);
+		this.prerequisite = prerequisite;
 		this.labCanStart = LocalTime.of(8,00);
 		this.labCanEndBy = LocalTime.of(18,00);
 		
@@ -82,8 +90,9 @@ public class CourseWithLab extends Course {
 		}
 
 	}
-
 	
+	
+	//Getter methods for private variables
 	
 	/*
 	Getter method to return a lab room
@@ -92,6 +101,72 @@ public class CourseWithLab extends Course {
 	 */
 	public String getLabRoom() {return labRoom;}
 	
+	/*
+	Getter method to return a course code
+	@param -
+	@return courseCode
+	 */
+	public String getCourseCode() {return courseCode;}
+
+	/*
+	Getter method to return a course title
+	@param -
+	@return courseTitle
+	 */	
+	public String getCourseTitle() {return courseTitle;}
+
+	/*
+	Getter method to return a course's credit
+	@param -
+	@return credit
+	 */
+	public int getCredit() {return credit;}	
+
+	
+	//Setter methods for private variables
+	
+	/*
+	Setter method to set a course code
+	@param courseCode
+	@return -
+	 */
+	public void setCourseCode(String courseCode) {this.courseCode = courseCode;}
+	
+	/*
+	Setter method to set a course title
+	@param courseTitle
+	@return -
+	 */
+	public void setCourseTitle(String courseTitle) {this.courseTitle = courseTitle;}
+	
+	/*
+	Setter method to set a class room
+	@param classRoom
+	@return -
+	 */
+	public void setClassRoom(String classRoom) {this.classRoom = classRoom;}
+	
+	/*
+	Setter method to set the date when the class is scheduled
+	@param dayCourseIsScheduled
+	@return -
+	 */
+	public void setDayCourseIsScheduled(DayOfWeek dayCourseIsScheduled) {this.dayCourseIsScheduled = dayCourseIsScheduled;}	
+	
+	/*
+	Setter method to set a course credit
+	@param credit
+	@return -
+	 */
+	public void setCredit(int credit) {this.credit = credit;}		
+
+	/*
+	Setter method to set a course's prerequisite
+	@param prerequisite
+	@return -
+	 */
+	public void setPrerequisite(String prerequisite) {this.prerequisite = prerequisite;}
+
 	/*
 	Setter method to set a lab room
 	@param labRoom
@@ -120,7 +195,7 @@ public class CourseWithLab extends Course {
 	@param -
 	@return the following text
 	 */
-	public String toString() {return super.getCourseCode() + "-" + super.getCourseTitle() + " with lab";}
+	public String toString() {return getCourseCode() + "-" + getCourseTitle() + " with lab";}
 
 		
 	
@@ -142,13 +217,24 @@ public class CourseWithLab extends Course {
 	 */	
 	public Instructor getLabTech() {return labTechnician;}
 	
+
+	
+	/*
+	method to return a instructor's full name
+	@param  -
+	@return the instructor's full name
+	 */	
+	public Instructor getInstructorToTeach() {return instructor;}
+
+	
+	
 	
 	/*
 	[Test 43] method to return prerequisite
 	@param  -
 	@return prerequisite
 	 */		
-	public String checkPrerequisite() {return super.checkPrerequisite();}
+	public String checkPrerequisite() {return prerequisite;}
 	
 	
 	

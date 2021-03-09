@@ -272,7 +272,7 @@ public class Student {
 	[Test 45] [Test 47] [Test 48] method to add course if it is passed and the grade is between 0-100
 	-If a grade is not between 0-100, the error will be printed
 	-If a student did not pass the course, nothing happens
-	-Otherwise, the grade and the course name will be printed
+	-Otherwise, the grade and the course name will be added to the list
 	@param  courseCode, grade
 	@return passed course info
 	 */		
