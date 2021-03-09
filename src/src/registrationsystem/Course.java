@@ -196,6 +196,7 @@ public class Course {
 	@return the instructor's full name
 	 */	
 	public Instructor getInstructorToTeach() {return instructor;}
+
 	
 	
 	/*
@@ -239,6 +240,9 @@ public class Course {
 	{
 		return this.listOfStudents.toString().substring(1, this.listOfStudents.toString().length() - 1);
 	}
+
+	
+	
 	
 
 	/*

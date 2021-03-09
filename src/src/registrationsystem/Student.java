@@ -10,21 +10,21 @@ package src.registrationsystem;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Student {
 	
 	//Declare variables
 	private String firstName, lastName, streetAddress, city, postalCode, courseCode;
-	private int studentNumber, grade;
+	private int studentNumber;
 	private LocalDate registrationDate, dateOfBirth;
 	private boolean goodStanding;
-	private boolean reinstateStatus;		
+	private boolean reinstateStatus;
+	private int grade;		
 	
 	//Create an ArrayList object, called "listOfCourseCompleted"
-	ArrayList<String> listOfCourseCompleted;
-
-
+	ArrayList<String> listOfCourseCompleted = new ArrayList<>();
 
 	//Create an Course class's object, called "course"
 	protected Course course;
@@ -48,7 +48,6 @@ public class Student {
 		this.goodStanding = true;
 		this.reinstateStatus = true;
 		
-		this.listOfCourseCompleted = new ArrayList<String>();
 		
 		//Validate if a student is over 100 years old
 		if (100 <= getStudentAge())
@@ -305,7 +304,8 @@ public class Student {
 		{
 			return;
 		} else {
-			this.listOfCourseCompleted.add(new String(course.toString() + " grade=" + grade));
+//			this.listOfCourseCompleted.add(new String(course.toString() + " grade=" + grade));
+			this.listOfCourseCompleted.add(Arrays.asList(course, grade).toString());
 		}
 	}
 
@@ -321,12 +321,24 @@ public class Student {
 	
 	public boolean hasCompleted(String courseCode)
 	{
-		if (this.listOfCourseCompleted.contains(courseCode) == true)
+		for (String course: this.listOfCourseCompleted)
 		{
-			return true;
-		} else {
-			return false;
+			if (course.contains(courseCode))
+			{
+				return true;
+			}
 		}
+		return false;
+		
+		
+		
+		
+//		if (this.listOfCourseCompleted.contains(courseCode) == true)
+//		{
+//			return true;
+//		} else {
+//			return false;
+//		}
 	}
 	
 	
