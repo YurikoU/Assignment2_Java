@@ -208,18 +208,16 @@ public class Course {
 	@return the proper message depends on the adding condition
 	 */	
 	public String addStudent(Student student) {
-
-		
-		
-		if (getClassSize() < this.listOfStudents.size())
+	
+		if (checkPrerequisite() != null) 
 		{
-			return "Student was not added because the course is full";
-		} else if (checkPrerequisite() != null) 
-		{
-			if (student.getCoursesCompleted().indexOf(checkPrerequisite()) != -1)
+			if (student.getCoursesCompleted().contains(checkPrerequisite()) == false)
 			{
 				return "Student has not completed the prerequisite course: " + checkPrerequisite();			
-			} 
+			} 			
+		} else if (getClassSize() < this.listOfStudents.size())
+		{
+			return "Student was not added because the course is full";
 		} else if (student.getGoodStanding() == false) 
 			{
 			return "The Student is not in good standing and cannot join the course.";
