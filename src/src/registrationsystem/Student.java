@@ -21,7 +21,6 @@ public class Student {
 	private LocalDate registrationDate, dateOfBirth;
 	private boolean goodStanding;
 	private boolean reinstateStatus;
-	private int grade;		
 	
 	//Create an ArrayList object, called "listOfCourseCompleted"
 	ArrayList<String> listOfCourseCompleted = new ArrayList<>();
@@ -56,38 +55,6 @@ public class Student {
 		}
 	}//The end of the constructor
 
-	
-	
-	//Create another constructor
-	public Student (Course course, int grade) 
-	{
-		this.course = course;
-		this.grade = grade;
-	}
-	
-	
-	/*
-	Getter method to return a grade
-	@param -
-	@return grade
-	 */
-	public Integer getGrade() {return grade;}
-
-	/*
-	Setter method to set a grade
-	@param grade
-	@return -
-	 */
-	public void setGrade(int grade) {this.grade = grade;}
-
-
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -296,7 +263,7 @@ public class Student {
 	@param  courseCode, grade
 	@return passed course info
 	 */		
-	public void addCompletedCourse(Course course, Integer grade) {
+	public void addCompletedCourse(Course course, int grade) {
 		if ((grade < 0) || (100 < grade))
 		{
 			throw new IllegalArgumentException("grade must be 0-100 inclusive");
@@ -317,7 +284,6 @@ public class Student {
 	@param  courseCode
 	@return false,true
 	 */		
-	
 	public boolean hasCompleted(String courseCode)
 	{
 		for (String course: this.listOfCourseCompleted)
