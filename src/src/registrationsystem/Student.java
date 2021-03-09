@@ -304,8 +304,7 @@ public class Student {
 		{
 			return;
 		} else {
-//			this.listOfCourseCompleted.add(new String(course.toString() + " grade=" + grade));
-			this.listOfCourseCompleted.add(Arrays.asList(course, grade).toString());
+			this.listOfCourseCompleted.add(new String(course.toString() + " grade=" + grade));
 		}
 	}
 
@@ -329,16 +328,6 @@ public class Student {
 			}
 		}
 		return false;
-		
-		
-		
-		
-//		if (this.listOfCourseCompleted.contains(courseCode) == true)
-//		{
-//			return true;
-//		} else {
-//			return false;
-//		}
 	}
 	
 	
