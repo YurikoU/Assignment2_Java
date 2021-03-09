@@ -195,7 +195,7 @@ public class Course {
 	@param  -
 	@return the instructor's full name
 	 */	
-	public String getInstructorToTeach() {return instructor.getFirstName() + " " + instructor.getLastName();}
+	public Instructor getInstructorToTeach() {return instructor;}
 	
 	
 	/*
