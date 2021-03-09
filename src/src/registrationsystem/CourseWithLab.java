@@ -37,6 +37,7 @@ public class CourseWithLab extends Course {
 		this.labCanStart = LocalTime.of(8,00);
 		this.labCanEndBy = LocalTime.of(18,00);
 		
+				
 		//Validate if a instructor can teach a lab
 		if (!instructor.instructorCanTeach(courseCode))
 		{
@@ -66,6 +67,7 @@ public class CourseWithLab extends Course {
 		this.timeLabIsScheduled = timeLabIsScheduled;
 		this.labCanStart = LocalTime.of(8,00);
 		this.labCanEndBy = LocalTime.of(18,00);
+		
 	
 		//Validate if a instructor can teach a lab
 		if (!instructor.instructorCanTeach(courseCode))

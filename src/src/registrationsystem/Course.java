@@ -26,8 +26,9 @@ public class Course {
 	//Create an ArrayList object, called "listOfStudents"
 	private List<Student> listOfStudents = new ArrayList<>();
 
-	//Create an Instructor class's object called "instructor"
+	//Create an Instructor class's object called "instructor", and a Student class's object called "student"
 	private Instructor instructor;
+	private Student student;
 	
 	
 	//[Test 21] [Test 33] [Test 29] [Test 30] 
@@ -67,15 +68,10 @@ public class Course {
 			DayOfWeek dayCourseIsScheduled, LocalTime timeCourseIsScheduled, int credit, String prerequisite)
 	{
 
-		this.instructor = instructor;
-		this.courseCode = courseCode;
-		this.courseTitle = courseTitle;
-		this.classRoom = classRoom;
-		this.dayCourseIsScheduled = dayCourseIsScheduled;
-		this.timeCourseIsScheduled = timeCourseIsScheduled;
-		this.credit = credit;
-		this.classSize = 40;
+		//Call the first constructor
+		this(instructor, courseCode, courseTitle, classRoom, dayCourseIsScheduled, timeCourseIsScheduled, credit);
 		this.prerequisite = prerequisite;
+		this.classSize = 40;
 		this.courseCanStart = LocalTime.of(8,00);
 		this.courseCanEndBy = LocalTime.of(18,00);
 
@@ -199,10 +195,10 @@ public class Course {
 	
 	
 	/*
-	[Test 25] [Test 26] [Test 27] [Test 42] [Test 44] method to add a student info who takes the course to a list up to the maximum number of students
-	-If a student is not in good standing, he/she will fail to add the course
-	-If the course is full, the message will be printed
-	-If a student did not pass prerequisite, he/she will fail to add the course
+	[Test 25] [Test 26] [Test 27] [Test 42] [Test 44] method to add a student info who takes the course up to the maximum number of students
+	-If a student is not in good standing, he/she will fail to register the course
+	-If the course is full, the error will be printed
+	-If a student did not pass prerequisite, he/she will fail to register the course
 	@param  a student object
 	@return the proper message depends on the adding condition
 	 */	
@@ -217,13 +213,12 @@ public class Course {
 		} else if (student.getGoodStanding() == false) 
 		{
 			return "The Student is not in good standing and cannot join the course.";
-		} 
-		else if (getClassSize() <= this.listOfStudents.size() || 2 <= this.listOfStudents.size())
+		} else if (getClassSize() <= this.listOfStudents.size() || 2 <= this.listOfStudents.size())
 		{
 			return "Student was not added because the course is full";
-		}
+		} 
 		this.listOfStudents.add(student);
-		return student.toString();
+		return "";
 	}
 
 	
@@ -235,15 +230,12 @@ public class Course {
 	 */	
 	public String displayTheClassList()
 	{
-		String result = "";
-		for (int i = 0; i < this.listOfStudents.size(); i++)
+		if (this.listOfStudents.isEmpty())
 		{
-			result += this.listOfStudents.get(i).toString();
-		}
-		return result;
+			return "";
+		} 
+		return this.listOfStudents.get(this.listOfStudents.size() - 1).toString();
 	}
-
-	
 	
 	
 
