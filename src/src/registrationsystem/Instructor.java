@@ -15,14 +15,21 @@ import java.util.List;
 
 public class Instructor {
 	
-	//Declare private variables
+	//Declare variables
 	private String firstName, lastName, streetAddress, city, postalCode;
 	private int instructorNumber;
 	private LocalDate registrationDate, dateOfBirth;
-	protected Course course;
+
+	//Create an ArrayList object, called "listOfSubjects"
 	ArrayList<String> listOfSubjects = new ArrayList<>();
+
+	//Create an Course class's object, called "course"
+	protected Course course;
 	
-	//[Test 9] [Test 19] Constructor with eight parameters with exception about a instructor's age and registration year
+	
+	
+	
+	//[Test 9] [Test 19] [Test 20] Constructor with eight parameters with exception about a instructor's age and registration year
 	public Instructor(String firstName,String lastName, int instructorNumber, String streetAddress, String city, String postalCode, 
 					LocalDate registrationDate, LocalDate dateOfBirth)
 	{
@@ -35,29 +42,82 @@ public class Instructor {
 		this.registrationDate = registrationDate;
 		this.dateOfBirth = dateOfBirth;
 		
+		//Validate if a instructor has been at the school over 80 years
 		if (80 <= noOfYearsAtCollege())
 		{
 			throw new IllegalArgumentException(getRegistrationDate() + " as a hire date would mean " + getFirstName() 
 											+ " started working over 80 years ago");
 		}
 		
+		//Validate if a instructor is over 100 years old
 		if (100 <= getAgeInYears())
 		{
 			throw new IllegalArgumentException("Please check the year entered, instructor cannot be over 100 years old\"");
 		}
 		
-	}
+	}//The end of the constructor
+		
+	
 
-	//Getter variables for private variables
+	//Getter methods for private variables
+	
+	/*
+	Getter method to return a first name
+	@param -
+	@return firstname
+	 */
 	public String getFirstName() {return firstName;}
+
+	/*
+	Getter method to return a last name
+	@param -
+	@return lastname
+	 */
 	public String getLastName() {return lastName;}
+
+	/*
+	Getter method to return an instructor number
+	@param -
+	@return instructorNumber
+	 */	
 	public int getInstructorNumber() {return instructorNumber;}	
+	
+	/*
+	Getter method to return the date when an instructor was registered
+	@param -
+	@return registrationDate
+	 */	
 	public LocalDate getRegistrationDate() {return registrationDate;}	
+	
+	/*
+	Getter method to return an instructor's birthday
+	@param -
+	@return dateOfBirth
+	 */	
 	public LocalDate getInstructorBirthday() {return dateOfBirth;}
 
+	
 	//Setter methods for private variables
+
+	/*
+	Setter method to set an instructor's first name
+	@param firstName
+	@return -
+	 */
 	public void setFirstName(String firstName) {this.firstName = firstName;}
+	
+	/*
+	Setter method to set a instructor's last name
+	@param lastName
+	@return -
+	 */
 	public void setLastName(String lastName) {this.lastName = lastName;}
+
+	/*
+	Setter method to set an instructor number
+	@param instructorNumber
+	@return -
+	 */
 	public void setInstructorNumber(int instructorNumber) {this.instructorNumber = instructorNumber;}	
 	
 	
@@ -91,7 +151,6 @@ public class Instructor {
 	
 	/*
 	[Test 11] method to return the years instructor has been at the college
-	[Test 20] validate the method if to return the years instructor has been at the college
 	@param -
 	@return yearsAtCollege
 	 */
@@ -110,7 +169,7 @@ public class Instructor {
 	
 	
 	/*
-	[Test 12] method to return an instructor's address
+	[Test 12] method to return an instructor's address as text
 	@param -
 	@return the instructor's full address
 	 */
@@ -119,7 +178,7 @@ public class Instructor {
 	
 	/*
 	[Test 13] method to update an instructor's address
-	@param  streetAddress, city, postalCode
+	@param  newStreetAddress, newCity, newPostalCode
 	@return -
 	*/
 	public void changeAddress(String newStreetAddress, String newCity, String newPostalCode) 
@@ -154,16 +213,11 @@ public class Instructor {
 	*/
 	public void addCourseToInstructorAbilities(String courseCode)
 	{
-		if (this.listOfSubjects == null)
+		if (this.listOfSubjects.contains(courseCode))
 		{
-			this.listOfSubjects.add(courseCode);
+			return;
 		} else {
-			if (this.listOfSubjects.indexOf(courseCode) != -1)
-			{
-				return;
-			} else {
-				this.listOfSubjects.add(courseCode);
-			}
+			this.listOfSubjects.add(courseCode);
 		}
 	}
 
@@ -173,7 +227,7 @@ public class Instructor {
 	@param  courseToCheck
 	@return true, false
 	*/
-	public Boolean instructorCanTeach(String courseToCheck) {
+	public boolean instructorCanTeach(String courseToCheck) {
 		if (this.listOfSubjects == null)
 		{
 			return false;
@@ -188,4 +242,4 @@ public class Instructor {
 	}
 
 	
-}
+}//The end of Instructor class

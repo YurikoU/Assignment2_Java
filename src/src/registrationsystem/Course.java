@@ -12,21 +12,27 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+//Course class is a superclass of CourseWithLab class
 public class Course {
 
-	//Declare private variables
+	//Declare variables
 	private String courseCode, courseTitle, classRoom, prerequisite;
 	private DayOfWeek dayCourseIsScheduled;
 	private LocalTime timeCourseIsScheduled, courseCanStart, courseCanEndBy;
 	private int credit;
 	private int classSize;
-	protected Instructor instructor;
-	protected Student student;
+
+	//Create an ArrayList object, called "listOfStudents"
 	ArrayList<Student> listOfStudents = new ArrayList<>();
 
+	//Create an Instructor class's object called "instructor", and a Student class's object called "student"
+	public Instructor instructor;
+	public Student student;
 	
-	//[Test 21] [Test 33] 
-	//Constructor with seven parameters including the validation if a professor can teach a course
+	
+	
+	//[Test 21] [Test 33] [Test 29] [Test 30] 
+	//Constructor with exception about if a professor can teach a course, and if the schedule is acceptable
 	public Course(Instructor instructor, String courseCode, String courseTitle, String classRoom, 
 					DayOfWeek dayCourseIsScheduled, LocalTime timeCourseIsScheduled, int credit)
 	{
@@ -48,11 +54,12 @@ public class Course {
 												+ " is not qualified to teach " + courseCode);
 		} 
 		
+		//Validate if the schedule is valid	
 		if (this.timeCourseIsScheduled.isBefore(courseCanStart) || this.timeCourseIsScheduled.isAfter(courseCanEndBy))
 		{
 			throw new java.lang.IllegalArgumentException("Course start time must be between 08:00-18:00");
 		}
-	}
+	}//The end of the constructor
 
 	
 	
@@ -70,32 +77,92 @@ public class Course {
 		this.credit = credit;
 		this.classSize = 40;
 		this.prerequisite = prerequisite;
-		ArrayList<Student> listOfStudents = new ArrayList<>();
-		LocalTime courseCanStart = LocalTime.of(8,00);
-		LocalTime courseCanEndBy = LocalTime.of(18,00);
+		this.courseCanStart = LocalTime.of(8,00);
+		this.courseCanEndBy = LocalTime.of(18,00);
 
 		//Validate if a professor can teach a course
 		if (instructor.instructorCanTeach(courseCode) == false)
 		{
 			throw new IllegalArgumentException("Professor " + instructor.getFirstName() + " " + instructor.getLastName()
 												+ " is not qualified to teach " + courseCode);
-		} else if (this.timeCourseIsScheduled.isBefore(courseCanStart) || this.timeCourseIsScheduled.isAfter(courseCanEndBy))
+		} 
+		
+		//Validate if the schedule is valid	
+		if (this.timeCourseIsScheduled.isBefore(courseCanStart) || this.timeCourseIsScheduled.isAfter(courseCanEndBy))
 		{
 			throw new java.lang.IllegalArgumentException("Course start time must be between 08:00-18:00");
 		}
-	}
+	}//The end of the constructor
 	
-	//Getter variables for private variables
+	
+	
+	
+	//Getter methods for private variables
+	
+	/*
+	Getter method to return a course code
+	@param -
+	@return courseCode
+	 */
 	public String getCourseCode() {return courseCode;}
+
+	/*
+	Getter method to return a course title
+	@param -
+	@return courseTitle
+	 */	
 	public String getCourseTitle() {return courseTitle;}
+
+	/*
+	Getter method to return a course's credit
+	@param -
+	@return credit
+	 */
 	public int getCredit() {return credit;}	
 
+
 	//Setter methods for private variables
+	
+	/*
+	Setter method to set a course code
+	@param courseCode
+	@return -
+	 */
 	public void setCourseCode(String courseCode) {this.courseCode = courseCode;}
+	
+	/*
+	Setter method to set a course title
+	@param courseTitle
+	@return -
+	 */
 	public void setCourseTitle(String courseTitle) {this.courseTitle = courseTitle;}
+	
+	/*
+	Setter method to set a class room
+	@param classRoom
+	@return -
+	 */
 	public void setClassRoom(String classRoom) {this.classRoom = classRoom;}
+	
+	/*
+	Setter method to set the date when the class is scheduled
+	@param dayCourseIsScheduled
+	@return -
+	 */
 	public void setDayCourseIsScheduled(DayOfWeek dayCourseIsScheduled) {this.dayCourseIsScheduled = dayCourseIsScheduled;}	
+	
+	/*
+	Setter method to set a course credit
+	@param credit
+	@return -
+	 */
 	public void setCredit(int credit) {this.credit = credit;}		
+
+	/*
+	Setter method to set a course's prerequisite
+	@param prerequisite
+	@return -
+	 */
 	public void setPrerequisite(String prerequisite) {this.prerequisite = prerequisite;}		
 
 	
@@ -116,9 +183,9 @@ public class Course {
 	
 	
 	/*
-	[Test 23] method to return the course schedule
+	[Test 23] method to return the time when the course is scheduled
 	@param  -
-	@return the course schedule
+	@return the course date and time
 	 */	
 	public String getCourseDayAndTime() {return this.dayCourseIsScheduled + "'s, starting at " + this.timeCourseIsScheduled;}
 	
@@ -133,43 +200,31 @@ public class Course {
 	
 	/*
 	[Test 25] [Test 26] [Test 27] [Test 42] [Test 44] method to add a student info who takes the course to a list up to the maximum number of students
-	@param  student
-	@return -
+	-If a student is not in good standing, he/she will fail to add the course
+	-If the course is full, the message will be printed
+	-If a student did not pass prerequisite, he/she will fail to add the course
+	@param  a student object
+	@return the proper message depends on the adding condition
 	 */	
 	public String addStudent(Student student) {
 
+		
+		
 		if (getClassSize() < this.listOfStudents.size())
 		{
 			return "Student was not added because the course is full";
-		} else if (student.getCoursesCompleted().indexOf(checkPrerequisite()) != -1)
+		} else if (checkPrerequisite() != null) 
 		{
-			return "Student has not completed the prerequisite course: " + checkPrerequisite();			
-		} else {
-//		if (student.getReinstateStatus() == true)
-//		{
-//			if (getClassSize() < this.listOfStudents.size())
-//			{
-//				return "Student was not added because the course is full";
-//			} else if (student.getGoodStanding() == false) 
-//			{
-//				return "The Student is not in good standing and cannot join the course.";
-//			} else if (checkPrerequisite() != null) 
-//			{
-//				if (student.getCoursesCompleted().indexOf(checkPrerequisite()) != -1)
-//				{
-					this.listOfStudents.add(student);
-					return this.listOfStudents.toString();
-//					return super.toString();
-		
-//				} else {
-//					return "Student has not completed the prerequisite course: " + checkPrerequisite();
-//				}
-//			} 
-//		}
-					
-				}
-			
-				
+			if (student.getCoursesCompleted().indexOf(checkPrerequisite()) != -1)
+			{
+				return "Student has not completed the prerequisite course: " + checkPrerequisite();			
+			} 
+		} else if (student.getGoodStanding() == false) 
+			{
+			return "The Student is not in good standing and cannot join the course.";
+		} 
+		this.listOfStudents.add(student);
+		return "";
 		
 	}
 
@@ -180,10 +235,9 @@ public class Course {
 	@param  -
 	@return toString() that is declared in Student class
 	 */	
-	public String displayTheClassList() {
-//		return this.listOfStudents.toString();
-		return this.listOfStudents.get(this.listOfStudents.size() - 1).toString();
-	
+	public String displayTheClassList()
+	{
+		return this.listOfStudents.toString().substring(1, this.listOfStudents.toString().length() - 1);
 	}
 	
 
@@ -194,13 +248,7 @@ public class Course {
 	 */	
 	public String setClassSize(int classSize)
 	{
-//		if ((0 < classSize) && (classSize <= getClassSize()))
-//		{
-//			this.classSize = classSize;		
-//			return;
-//		} else {
-			return "Max class size = " + getClassSize() + ", it has been set to " + getClassSize();
-//		}
+		return "Max class size = " + getClassSize() + ", it has been set to " + getClassSize();
 	}
 	
 
@@ -211,25 +259,6 @@ public class Course {
 	 */	
 	public int getClassSize() {return classSize;}
 	
-
-	/*
-	[Test 29] [Test 30] method to set the time course is scheduled
-	@param  timeCourseIsScheduled
-	@return -
-	 */		
-//	public void setTimeCourseIsScheduled(LocalTime timeCourseIsScheduled)
-//	{
-//		LocalTime courseCanStart = LocalTime.of(8,00);
-//		LocalTime courseCanEndBy = LocalTime.of(18,00);
-//		
-//		if (this.timeCourseIsScheduled.isBefore(courseCanStart) || this.timeCourseIsScheduled.isAfter(courseCanEndBy))
-//		{
-//			throw new java.lang.IllegalArgumentException("Course start time must be between 08:00-18:00");
-//		} else {
-//			this.timeCourseIsScheduled = timeCourseIsScheduled;
-//		}
-//	}
-
 	
 
 	/*
@@ -243,13 +272,14 @@ public class Course {
 		int sumOfAge = 0;
 		int aveOfAge = 0;
 
+		//Adding all students' age and calculate the average age of the class
 		for(int i = 0; i < this.listOfStudents.size(); i++)
 		{
-//			sumOfAge += student.getStudentAge();
 			sumOfAge += this.listOfStudents.get(i).getStudentAge();
 		}
 		aveOfAge = sumOfAge / this.listOfStudents.size();
-		
+
+		//If the average age is over 25, it's a mature class, then return true. Otherwise, return false.
 		if (25 < aveOfAge)
 		{
 			mature = true;
@@ -267,14 +297,7 @@ public class Course {
 	 */		
 	public String checkPrerequisite() {return this.prerequisite;}
 
-	
-	
-	
-	
-	
-	
-	
 
 	
 	
-}
+}//The end of Course class

@@ -3,7 +3,7 @@ Student Name: Yuriko Uchida
 Student Number: #200448500
  */
 
-//This class belongs to the following package.
+//This class belongs to the following package
 package src.registrationsystem;
 
 //Include libraries
@@ -14,16 +14,24 @@ import java.util.ArrayList;
 
 public class Student {
 	
-	//Declare private variables
+	//Declare variables
 	private String firstName, lastName, streetAddress, city, postalCode, courseCode;
-	private int studentNumber;
+	private int studentNumber, grade;
 	private LocalDate registrationDate, dateOfBirth;
-	private boolean goodStanding = true;
-	private boolean reinstateStatus = true;
-	private ArrayList<String> listOfCourseCompleted = new ArrayList<>();
+	private boolean goodStanding;
+	private boolean reinstateStatus;		
+	
+	//Create an ArrayList object, called "listOfCourseCompleted"
+	ArrayList<String> listOfCourseCompleted;
+
+
+
+	//Create an Course class's object, called "course"
 	protected Course course;
 	
-	//[Test 1] [Test 7] Constructor with nine parameters with exception about a student's age
+	
+	
+	//[Test 1] [Test 7] Constructor with exception about a student's age
 	public Student(String firstName,String lastName,String streetAddress,
 					String city, String postalCode, String courseCode, 
 					int studentNumber, LocalDate registrationDate, LocalDate dateOfBirth)
@@ -37,41 +45,161 @@ public class Student {
 		this.studentNumber = studentNumber;
 		this.registrationDate = registrationDate;
 		this.dateOfBirth = dateOfBirth;
+		this.goodStanding = true;
+		this.reinstateStatus = true;
 		
+		this.listOfCourseCompleted = new ArrayList<String>();
+		
+		//Validate if a student is over 100 years old
 		if (100 <= getStudentAge())
 		{
 			throw new IllegalArgumentException("Please check the year entered, student cannot be over 100 years old");
 		}
-	}
+	}//The end of the constructor
 
-	//Getter variables for private variables
+	
+	
+	//Create another constructor
+	public Student (Course course, int grade) 
+	{
+		this.course = course;
+		this.grade = grade;
+	}
+	
+	
+	/*
+	Getter method to return a grade
+	@param -
+	@return grade
+	 */
+	public Integer getGrade() {return grade;}
+
+	/*
+	Setter method to set a grade
+	@param grade
+	@return -
+	 */
+	public void setGrade(int grade) {this.grade = grade;}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//Getter methods for private variables
+	
+	/*
+	Getter method to return a first name
+	@param -
+	@return firstname
+	 */
 	public String getFirstName() {return firstName;}
+	
+	/*
+	Getter method to return a last name
+	@param -
+	@return lastname
+	 */
 	public String getLastName() {return lastName;}
+	
+	/*
+	Getter method to return student's full address as text
+	@param -
+	@return student's full address
+	 */
 	public String getStudentAddress() {return this.streetAddress + " " + this.city + " " + this.postalCode;}
+
+	/*
+	Getter method to return courseCode
+	@param -
+	@return courseCode
+	 */
 	public String getCourseCode() {return courseCode;}
+	
+	/*
+	Getter method to return a student number
+	@param -
+	@return studentNumber
+	 */
 	public int getStudentNumber() {return studentNumber;}	
+	
+	/*
+	Getter method to return a student's birthday
+	@param -
+	@return dateOfBirth
+	 */
 	public LocalDate getStudentBirthday() {return dateOfBirth;}
+	
+	/*
+	Getter method to return if a student is in good standing
+	@param -
+	@return goodStanding, which is a variable to store true or false depends on a student's good standing status
+	 */
 	public boolean getGoodStanding() {return goodStanding;}
+
+	/*
+	Getter method to return if a student is a returning student
+	@param -
+	@return reinstateStatus, which is a variable to store true or false depends on a student is a returning student
+	 */
 	public boolean getReinstateStatus() {return reinstateStatus;}
 	
 	
+
 	//Setter methods for private variables
-	public void setFirstName(String firstName) {this.firstName = firstName;}
-	public void setLastName(String lastName) {this.lastName = lastName;}
-	public void setCourseCode(String courseCode) {this.courseCode = courseCode;}
-	public void setStudentNumber(int studentNumber) {this.studentNumber = studentNumber;}	
 	
+	/*
+	Setter method to set an instructor's first name
+	@param firstName
+	@return -
+	 */
+	public void setFirstName(String firstName) {this.firstName = firstName;}
+
+	/*
+	Setter method to set a student's last name
+	@param lastName
+	@return -
+	 */
+	public void setLastName(String lastName) {this.lastName = lastName;}
+
+	/*
+	Setter method to set a course code
+	@param courseCode
+	@return -
+	 */
+	public void setCourseCode(String courseCode) {this.courseCode = courseCode;}
+	
+	/*
+	Setter method to set a student number
+	@param studentNumber
+	@return -
+	 */
+	public void setStudentNumber(int studentNumber) {this.studentNumber = studentNumber;}	
+
+	/*
+	Setter method to set a student's birthday
+	@param dateOfBirth
+	@return -
+	 */
+	public void setBirthday(LocalDate dateOfBirth) {this.dateOfBirth = dateOfBirth;}
+
 	
 	/*
 	[Test 1] method to return the basic student information as text
 	@param -
-	@return the following text
+	@return the following basic student info
 	 */
 	public String toString() {return getFirstName() + " " + getLastName() + ", student number: " + getStudentNumber();}
 	
 	
 	/*
-	[Test 2] [Test 3] method to return a correct student's age
+	[Test 2] [Test 3] method to return a student's age
 	@param -
 	@return studentAge
 	 */	
@@ -91,7 +219,7 @@ public class Student {
 	
 	/*
 	[Test 4] method to update a student address
-	@param  streetAddress, city, postalCode
+	@param  newStreetAddress, newCity, newPostalCode
 	@return -
 	*/
 	public void changeAddress(String newStreetAddress, String newCity, String newPostalCode) 
@@ -106,7 +234,7 @@ public class Student {
 	/*
 	[Test 5] method to return if the student is in good standing
 	@param  -
-	@return goodStanding
+	@return goodStanding, which is a variable to store true or false depends on the student's standing status
 	*/
 	public boolean studentInGoodStanding(){return goodStanding;}
 
@@ -118,16 +246,6 @@ public class Student {
 	*/
 	public void suspendStudent(){this.goodStanding = false;}
 	
-	
-	/*
-	[Test 7] method to set a student's birthday with validation of if a student's age is over 100 years old
-	@param  dateOfBirth
-	@return -
-	 */	
-	public void setBirthday(LocalDate dateOfBirth)
-	{
-		this.dateOfBirth = dateOfBirth;			
-	}
 	
 
 	/*
@@ -154,16 +272,32 @@ public class Student {
 	@param  -
 	@return listOfCourseCompleted
 	 */		
-	public ArrayList<String> getCoursesCompleted() {return listOfCourseCompleted;}
-	
+	public String getCoursesCompleted() 
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		for (int i = 0; i < this.listOfCourseCompleted.size(); i++)
+		{
+			if (0 < i)
+			{
+				sb.append(", ");
+			}
+			sb.append(this.listOfCourseCompleted.get(i));
+		}
+		sb.append("]");
+		return sb.toString();
+	}
 	
 	
 	/*
 	[Test 45] [Test 47] [Test 48] method to add course if it is passed and the grade is between 0-100
+	-If a grade is not between 0-100, the error will be printed
+	-If a student did not pass the course, nothing happens
+	-Otherwise, the grade and the course name will be printed
 	@param  courseCode, grade
 	@return passed course info
 	 */		
-	public void addCompletedCourse(Course course, int grade) {
+	public void addCompletedCourse(Course course, Integer grade) {
 		if ((grade < 0) || (100 < grade))
 		{
 			throw new IllegalArgumentException("grade must be 0-100 inclusive");
@@ -171,7 +305,7 @@ public class Student {
 		{
 			return;
 		} else {
-			this.listOfCourseCompleted.add(course.toString() + " grade=" + grade);
+			this.listOfCourseCompleted.add(new String(course.toString() + " grade=" + grade));
 		}
 	}
 
@@ -179,16 +313,19 @@ public class Student {
 	
 	/*
 	[Test 46] method to return if a student passed a course
+	-If a student has completed the course, return true
+	-Otherwise, return false
 	@param  courseCode
 	@return false,true
 	 */		
+	
 	public boolean hasCompleted(String courseCode)
 	{
-		if (this.listOfCourseCompleted.indexOf(courseCode) == -1)
+		if (this.listOfCourseCompleted.contains(courseCode) == true)
 		{
-			return false;
-		} else {
 			return true;
+		} else {
+			return false;
 		}
 	}
 	
@@ -199,4 +336,4 @@ public class Student {
 	
 	
 	
-}
+}//The end of Student class
