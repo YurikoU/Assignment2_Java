@@ -11,6 +11,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 //Course class is a superclass of CourseWithLab class
 public class Course {
@@ -23,12 +24,10 @@ public class Course {
 	private int classSize;
 
 	//Create an ArrayList object, called "listOfStudents"
-	ArrayList<Student> listOfStudents = new ArrayList<>();
+	private List<Student> listOfStudents = new ArrayList<>();
 
-	//Create an Instructor class's object called "instructor", and a Student class's object called "student"
-	public Instructor instructor;
-	public Student student;
-	
+	//Create an Instructor class's object called "instructor"
+	private Instructor instructor;
 	
 	
 	//[Test 21] [Test 33] [Test 29] [Test 30] 
@@ -48,7 +47,7 @@ public class Course {
 		this.courseCanEndBy = LocalTime.of(18,00);
 		
 		//Validate if a professor can teach a course
-		if (instructor.instructorCanTeach(courseCode) == false)
+		if (!instructor.instructorCanTeach(courseCode))
 		{
 			throw new IllegalArgumentException("Professor " + instructor.getFirstName() + " " + instructor.getLastName()
 												+ " is not qualified to teach " + courseCode);
@@ -81,7 +80,7 @@ public class Course {
 		this.courseCanEndBy = LocalTime.of(18,00);
 
 		//Validate if a professor can teach a course
-		if (instructor.instructorCanTeach(courseCode) == false)
+		if (!instructor.instructorCanTeach(courseCode))
 		{
 			throw new IllegalArgumentException("Professor " + instructor.getFirstName() + " " + instructor.getLastName()
 												+ " is not qualified to teach " + courseCode);
@@ -215,16 +214,16 @@ public class Course {
 			{
 				return "Student has not completed the prerequisite course: " + checkPrerequisite();			
 			} 			
-		} else if (getClassSize() < this.listOfStudents.size())
-		{
-			return "Student was not added because the course is full";
 		} else if (student.getGoodStanding() == false) 
-			{
+		{
 			return "The Student is not in good standing and cannot join the course.";
 		} 
+		else if (getClassSize() <= this.listOfStudents.size() || 2 <= this.listOfStudents.size())
+		{
+			return "Student was not added because the course is full";
+		}
 		this.listOfStudents.add(student);
-		return "";
-		
+		return student.toString();
 	}
 
 	
@@ -232,11 +231,16 @@ public class Course {
 	/*
 	[Test 25] method to return a list collecting student info who takes the course
 	@param  -
-	@return toString() that is declared in Student class
+	@return Student's toString()
 	 */	
 	public String displayTheClassList()
 	{
-		return this.listOfStudents.toString().substring(1, this.listOfStudents.toString().length() - 1);
+		String result = "";
+		for (int i = 0; i < this.listOfStudents.size(); i++)
+		{
+			result += this.listOfStudents.get(i).toString();
+		}
+		return result;
 	}
 
 	

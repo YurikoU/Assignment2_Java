@@ -21,11 +21,7 @@ public class Instructor {
 	private LocalDate registrationDate, dateOfBirth;
 
 	//Create an ArrayList object, called "listOfSubjects"
-	ArrayList<String> listOfSubjects = new ArrayList<>();
-
-	//Create an Course class's object, called "course"
-	protected Course course;
-	
+	private List<String> listOfSubjects = new ArrayList<>();
 	
 	
 	
@@ -196,7 +192,7 @@ public class Instructor {
 	*/
 	public String listOfSubjectsCertifiedToTeach() 
 	{
-		if (this.listOfSubjects.isEmpty() == true) 
+		if (this.listOfSubjects.isEmpty()) 
 		{
 			return "not qualified to teach courses yet.";
 		} else {
@@ -213,10 +209,8 @@ public class Instructor {
 	*/
 	public void addCourseToInstructorAbilities(String courseCode)
 	{
-		if (this.listOfSubjects.contains(courseCode))
+		if (!instructorCanTeach(courseCode))
 		{
-			return;
-		} else {
 			this.listOfSubjects.add(courseCode);
 		}
 	}
@@ -227,18 +221,16 @@ public class Instructor {
 	@param  courseToCheck
 	@return true, false
 	*/
-	public boolean instructorCanTeach(String courseToCheck) {
-		if (this.listOfSubjects == null)
+	public boolean instructorCanTeach(String courseToCheck) 
+	{
+		for(int i = 0; i < this.listOfSubjects.size(); i++)
 		{
-			return false;
-		} else {
-			if (this.listOfSubjects.indexOf(courseToCheck) == -1)
+			if (this.listOfSubjects.get(i).equals(courseToCheck))
 			{
-				return false;
-			} else {
 				return true;
 			}
 		}
+		return false;
 	}
 
 	

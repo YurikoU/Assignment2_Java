@@ -11,22 +11,19 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class Student {
 	
 	//Declare variables
 	private String firstName, lastName, streetAddress, city, postalCode, courseCode;
-	private int studentNumber;
+	private int studentNumber, grade;
 	private LocalDate registrationDate, dateOfBirth;
-	private boolean goodStanding;
-	private boolean reinstateStatus;
+	private boolean goodStanding, reinstateStatus;
 	
 	//Create an ArrayList object, called "listOfCourseCompleted"
-	ArrayList<String> listOfCourseCompleted = new ArrayList<>();
-
-	//Create an Course class's object, called "course"
-	protected Course course;
+	private List<String> listOfCourseCompleted = new ArrayList<>();
 	
 	
 	
@@ -116,6 +113,14 @@ public class Student {
 	 */
 	public boolean getReinstateStatus() {return reinstateStatus;}
 	
+	/*
+	Getter method to return a grade
+	@param -
+	@return grade
+	 */
+	public int getGrade() {return grade;}
+	
+	
 	
 
 	//Setter methods for private variables
@@ -155,6 +160,14 @@ public class Student {
 	 */
 	public void setBirthday(LocalDate dateOfBirth) {this.dateOfBirth = dateOfBirth;}
 
+	/*
+	Setter method to set a grade
+	@param grade
+	@return -
+	 */
+	public void setGrade(int grade) {this.grade = grade;}
+
+	
 	
 	/*
 	[Test 1] method to return the basic student information as text

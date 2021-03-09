@@ -20,7 +20,7 @@ public class CourseWithLab extends Course {
 	private String labRoom;
 	private DayOfWeek dayLabIsScheduled;
 	private LocalTime timeLabIsScheduled, labCanStart, labCanEndBy;
-	public Instructor instructor, labTechnician;
+	private Instructor instructor, labTechnician;
 	
 	//[Test 34] [Test 37] 
 	//Constructor with exception about if a instructor can teach a lab, and if the schedule is acceptable
@@ -38,10 +38,11 @@ public class CourseWithLab extends Course {
 		this.labCanEndBy = LocalTime.of(18,00);
 		
 		//Validate if a instructor can teach a lab
-		if (instructor.instructorCanTeach(courseCode) == false)
+		if (!instructor.instructorCanTeach(courseCode))
 		{
 			throw new IllegalArgumentException("The Lab Tech is not qualified to host the lab");
 		} 
+				
 
 		//Validate if the schedule is valid	
 		if (this.timeLabIsScheduled.isBefore(this.labCanStart) || this.timeLabIsScheduled.isAfter(this.labCanEndBy))
@@ -67,7 +68,7 @@ public class CourseWithLab extends Course {
 		this.labCanEndBy = LocalTime.of(18,00);
 	
 		//Validate if a instructor can teach a lab
-		if (instructor.instructorCanTeach(courseCode) == false)
+		if (!instructor.instructorCanTeach(courseCode))
 		{
 			throw new IllegalArgumentException("The Lab Tech is not qualified to host the lab");
 		} 
@@ -146,19 +147,6 @@ public class CourseWithLab extends Course {
 	@return prerequisite
 	 */		
 	public String checkPrerequisite() {return super.checkPrerequisite();}
-	
-	
-	/*
-	[Test 44] method to add a student info who takes the course to a list up to the maximum number of students
-	@param  student
-	@return -
-	 */		
-//	public String addStudent(Student student)
-//	{
-//		super.addStudent(student);
-//	}
-//	
-//	
 	
 	
 	
