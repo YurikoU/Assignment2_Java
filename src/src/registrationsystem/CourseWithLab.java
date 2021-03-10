@@ -46,21 +46,20 @@ public class CourseWithLab {
 		this.timeLabIsScheduled = timeLabIsScheduled;
 		this.labCanStart = LocalTime.of(8,00);
 		this.labCanEndBy = LocalTime.of(18,00);
-		
+		this.classSize = 40;
 				
 		//Validate if a instructor can teach a lab
 		if (!instructor.instructorCanTeach(courseCode))
 		{
 			throw new IllegalArgumentException("The Lab Tech is not qualified to host the lab");
 		} 
-				
 
 		//Validate if the schedule is valid	
 		if (this.timeLabIsScheduled.isBefore(this.labCanStart) || this.timeLabIsScheduled.isAfter(this.labCanEndBy))
 		{
 			throw new java.lang.IllegalArgumentException("The lab start time must be between 08:00-18:00");
 		}
-	}
+	}//The end of the constructor
 
 	
 	//[Test 37] [Test 43]
@@ -75,7 +74,7 @@ public class CourseWithLab {
 		this.prerequisite = prerequisite;
 		this.labCanStart = LocalTime.of(8,00);
 		this.labCanEndBy = LocalTime.of(18,00);
-		
+		this.classSize = 40;
 	
 		//Validate if a instructor can teach a lab
 		if (!instructor.instructorCanTeach(courseCode))
@@ -88,9 +87,9 @@ public class CourseWithLab {
 		{
 			throw new java.lang.IllegalArgumentException("The lab start time must be between 08:00-18:00");
 		}
-
-	}
+	}//The end of the constructor
 	
+
 	
 	//Getter methods for private variables
 	
@@ -122,6 +121,13 @@ public class CourseWithLab {
 	 */
 	public int getCredit() {return credit;}	
 
+	/*
+	Getter method to return the maximum number of students per class
+	@param  -
+	@return classSize
+	 */	
+	public int getClassSize() {return classSize;}
+	
 	
 	//Setter methods for private variables
 	
@@ -187,6 +193,23 @@ public class CourseWithLab {
 	@return -
 	 */		
 	public void setLabTechnician(Instructor labTechnician) {this.labTechnician = labTechnician;}
+	
+	/*
+	Setter method to set the maximum number of students per class
+	@param  classSize
+	@return the message that says the max number of students
+	 */	
+	public String setClassSize(int classSize)
+	{
+		if (40 < classSize)
+		{
+			this.classSize = 40;
+			return "Max class size = 40, it has been set to 40";
+		} 
+		this.classSize = classSize;
+		return "";
+	}
+
 	
 	
 	

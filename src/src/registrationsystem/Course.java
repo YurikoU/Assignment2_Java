@@ -16,16 +16,15 @@ import java.util.List;
 public class Course {
 
 	//Declare variables
-	private String courseCode, courseTitle, classRoom, prerequisite;
+	private String courseCode, courseTitle, classRoom, prerequisite, addedStudent;
 	private DayOfWeek dayCourseIsScheduled;
 	private LocalTime timeCourseIsScheduled, courseCanStart, courseCanEndBy;
-	private int credit;
-	private int classSize;
+	private int credit, classSize;
 
 	//Create an ArrayList object, called "listOfStudents"
 	private List<Student> listOfStudents = new ArrayList<>();
 
-	//Create an Instructor class's object called "instructor", and a Student class's object called "student"
+	//Create an Instructor class's object, and a Student class's object
 	private Instructor instructor;
 	private Student student;
 	
@@ -42,7 +41,7 @@ public class Course {
 		this.dayCourseIsScheduled = dayCourseIsScheduled;
 		this.timeCourseIsScheduled = timeCourseIsScheduled;
 		this.credit = credit;
-		this.classSize = 40;
+		this.classSize = 2;
 		this.courseCanStart = LocalTime.of(8,00);
 		this.courseCanEndBy = LocalTime.of(18,00);
 		
@@ -212,7 +211,7 @@ public class Course {
 		} else if (student.getGoodStanding() == false) 
 		{
 			return "The Student is not in good standing and cannot join the course.";
-		} else if (getClassSize() <= this.listOfStudents.size() || 2 <= this.listOfStudents.size())
+		} else if (getClassSize() <= this.listOfStudents.size())
 		{
 			return "Student was not added because the course is full";
 		} 
@@ -223,7 +222,7 @@ public class Course {
 	
 	
 	/*
-	[Test 25] method to return a list collecting student info who takes the course
+	[Test 25] method to return a students list who takes the course
 	@param  -
 	@return Student's toString()
 	 */	
@@ -245,8 +244,15 @@ public class Course {
 	 */	
 	public String setClassSize(int classSize)
 	{
-		return "Max class size = " + getClassSize() + ", it has been set to " + getClassSize();
+		if (40 < classSize)
+		{
+			this.classSize = 40;
+			return "Max class size = 40, it has been set to 40";
+		} 
+		this.classSize = classSize;
+		return "";
 	}
+	
 	
 
 	/*
@@ -292,7 +298,7 @@ public class Course {
 	@param  -
 	@return prerequisite
 	 */		
-	public String checkPrerequisite() {return this.prerequisite;}
+	public String checkPrerequisite() {return prerequisite;}
 
 
 	
