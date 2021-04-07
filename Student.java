@@ -187,7 +187,7 @@ public class Student {
 		int studentAge = Period.between(getStudentBirthday(), LocalDate.now()).getYears();					
 		if (LocalDate.now().getMonth() == getStudentBirthday().getMonth())
 		{
-			if (LocalDate.now().getDayOfMonth() < getStudentBirthday().getDayOfMonth()) 
+			if (getStudentBirthday().getDayOfMonth() < LocalDate.now().getDayOfMonth()) 
 			{
 				studentAge--;
 			}

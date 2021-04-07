@@ -48,7 +48,7 @@ public class Instructor {
 		//Validate if a instructor is over 100 years old
 		if (100 <= getAgeInYears())
 		{
-			throw new IllegalArgumentException("Please check the year entered, instructor cannot be over 100 years old\"");
+			throw new IllegalArgumentException("Please check the year entered, instructor cannot be over 100 years old");
 		}
 		
 	}//The end of the constructor
@@ -136,7 +136,7 @@ public class Instructor {
 		int ageInYears = Period.between(getInstructorBirthday(), LocalDate.now()).getYears();					
 		if (LocalDate.now().getMonth() == getInstructorBirthday().getMonth())
 		{
-			if (LocalDate.now().getDayOfMonth() < getInstructorBirthday().getDayOfMonth()) 
+			if (getInstructorBirthday().getDayOfMonth() < LocalDate.now().getDayOfMonth()) 
 			{
 				ageInYears--;
 			}
@@ -155,7 +155,7 @@ public class Instructor {
 		int yearsAtCollege = Period.between(getRegistrationDate(), LocalDate.now()).getYears();					
 		if (LocalDate.now().getMonth() == getRegistrationDate().getMonth())
 		{
-			if (LocalDate.now().getDayOfMonth() < getRegistrationDate().getDayOfMonth()) 
+			if (getRegistrationDate().getDayOfMonth() < LocalDate.now().getDayOfMonth()) 
 			{
 				yearsAtCollege--;
 			}
